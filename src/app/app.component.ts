@@ -3,6 +3,9 @@ import {select, Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {map} from 'rxjs/operators';
 import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router} from '@angular/router';
+import { AuthState } from './auth/reducers';
+import { Action } from 'rxjs/internal/scheduler/Action';
+import { isLogedin } from './auth/auth.selector';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +16,10 @@ export class AppComponent implements OnInit {
 
     loading = true;
 
-    constructor(private router: Router) {
+    isLoggedin$: Observable<boolean>;
+    isLoggedout$: Observable<boolean>;
+
+    constructor(private router: Router, private store: Store<AuthState>) {
 
     }
 
@@ -37,9 +43,21 @@ export class AppComponent implements OnInit {
           }
         }
       });
-
+      
+      // this.isLoggedin$ =  this.store
+      //   .pipe(
+      //     map(state => !!state['auth'].user)
+      //   )
+      // this.isLoggedout$ = this.store
+      //     .pipe(
+      //       map(state => !state["auth"].user)
+      //     )
+      this.isLoggedin$ = this.store
+        .pipe(
+          select(isLogedin)
+        )
+        console.log(this.isLoggedin$)
     }
-
     logout() {
 
     }
