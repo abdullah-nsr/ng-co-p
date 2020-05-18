@@ -9,6 +9,7 @@ import {tap} from "rxjs/operators";
 import {noop} from "rxjs";
 import {Router} from "@angular/router";
 import { login } from '../auth.action';
+import { AuthAction } from '../action-types';
 
 @Component({
   selector: 'login',
@@ -50,12 +51,7 @@ export class LoginComponent implements OnInit {
         //     userProfile: user
         //   }
         // })
-
-        const loginaction = login({user});
-        console.log(loginaction);
-        debugger;
-        this.store.dispatch(loginaction)
-
+        this.store.dispatch(AuthAction.login({user}))
         this.router.navigateByUrl('/courses');
       })
     )

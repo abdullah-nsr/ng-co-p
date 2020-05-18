@@ -6,6 +6,8 @@ import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Route
 import { AuthState } from './auth/reducers';
 import { Action } from 'rxjs/internal/scheduler/Action';
 import { isLogedin } from './auth/auth.selector';
+import { AuthAction } from './auth/action-types';
+import { json } from 'body-parser';
 
 @Component({
   selector: 'app-root',
@@ -22,8 +24,12 @@ export class AppComponent implements OnInit {
     constructor(private router: Router, private store: Store<AuthState>) {
 
     }
-
     ngOnInit() {
+
+      const userProfile = localStorage.getItem('user');
+      if(userProfile) {
+        this.store.dispatch(AuthAction.login({user: JSON.parse(userProfile)}))
+      } 
 
       this.router.events.subscribe(event  => {
         switch (true) {
@@ -59,7 +65,7 @@ export class AppComponent implements OnInit {
         console.log(this.isLoggedin$)
     }
     logout() {
-
+      this.store.dispatch(AuthAction.logout());
+      this.router.navigateByUrl('/login')
     }
-
 }

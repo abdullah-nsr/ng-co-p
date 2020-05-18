@@ -28,10 +28,15 @@ export const initialAuthState :AuthState = {
 export const authReducer = createReducer(
   initialAuthState,
   on(AuthAction.login, (state, action) => {
-    debugger;
     return {
       user: action.user
     }
+  }),
+  on(AuthAction.logout, (state, action) => {
+    return {
+      user: undefined
+    }
   })
 )
+
 //  export const metaReducers: MetaReducer<AppState>[] = !environment.production ? [] : [];
