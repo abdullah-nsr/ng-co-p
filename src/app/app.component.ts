@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
 
       const userProfile = localStorage.getItem('user');
       if(userProfile) {
-        this.store.dispatch(AuthAction.login({user: JSON.parse(userProfile)}))
+         this.store.dispatch(AuthAction.login({user: JSON.parse(userProfile)}))
       } 
 
       this.router.events.subscribe(event  => {
