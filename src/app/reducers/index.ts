@@ -9,11 +9,11 @@ import { environment } from '../../environments/environment';
 import { routerReducer } from '@ngrx/router-store';
 import { Action } from 'rxjs/internal/scheduler/Action';
 
-export interface State {
+export interface AppState {
 
 }
 
-export const reducers: ActionReducerMap<State> = {
+export const reducers: ActionReducerMap<AppState> = {
   router: routerReducer
 };
 
@@ -26,5 +26,5 @@ export function logger(reducer: ActionReducer<any>)
     }
 }
 
-export const metaReducers: MetaReducer<State>[] = 
+export const metaReducers: MetaReducer<AppState>[] = 
 !environment.production ? [logger] : [];
