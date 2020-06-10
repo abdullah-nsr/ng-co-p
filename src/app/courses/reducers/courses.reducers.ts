@@ -31,8 +31,11 @@ export const coursesReducer = createReducer(
          (state, action) => adapter.addAll(action.courses, {
              ...state,
              allCoursesLoaded : true
-         })) 
-)
+         })),
+          // this will update on local only 
+    on(CourseActions.UpdateCourses,
+        (state, action) => adapter.updateOne(action.update,state)  )
+);
 
 export const {
     selectAll

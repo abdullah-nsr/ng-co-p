@@ -70,6 +70,7 @@ export class HomeComponent implements OnInit {
     this.advancedCourses$ = this.store.pipe(select(fromCoursesSelectors.selectadvancedCourses$));
 
     this.promoTotal$ = this.store.pipe(select(fromCoursesSelectors.selectpromoTotal$));
+  
   }
 
   onAddCourse() {
